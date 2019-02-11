@@ -19,6 +19,7 @@ const fetchLatestConversionRates = function* ({ currency }) {
     }
     const response = yield call(getLatestRate, usedCurrency);
     const result = yield response.json();
+
     if (result.error) {
       yield put({ type: CONVERSION_ERROR, error: result.error });
     } else {
