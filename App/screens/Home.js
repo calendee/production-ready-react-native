@@ -14,14 +14,9 @@ import { changeCurrencyAmount, swapCurrency, getInitialConversion } from '../act
 import { changeNetworkStatus } from '../actions/network';
 
 class Home extends Component {
-  constructor(props) {
-    super(props);
-
-    this.props.dispatch(getInitialConversion());
-  }
-
   componentDidMount() {
     NetInfo.addEventListener('connectionChange', this.handleNetworkChange);
+    this.props.dispatch(getInitialConversion());
   }
 
   componentDidUpdate() {
