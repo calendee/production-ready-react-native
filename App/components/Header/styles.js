@@ -14,11 +14,18 @@ export default StyleSheet.create({
         paddingTop: StatusBar.currentHeight,
       },
     }),
+    flexDirection: 'row',
+    flex: 1,
+    justifyContent: 'space-between',
   },
   button: {
-    alignSelf: 'flex-end',
+    alignItems: 'flex-end',
     paddingVertical: 5,
     paddingHorizontal: 20,
+    flex: 1,
+  },
+  buttonLeft: {
+    alignItems: 'flex-start',
   },
   icon: {
     width: 18,

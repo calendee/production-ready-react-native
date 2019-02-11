@@ -58,7 +58,12 @@ class Home extends Component {
     this.props.navigation.navigate('Options');
   };
 
+  handleDisconnectedPress = () => {
+    this.props.alertWithType('error', 'Not Connected to Internet', 'Some features may not work.');
+  };
+
   render() {
+    const { isConnected } = this.props;
     let quotePrice = '...';
     if (!this.props.isFetching) {
       quotePrice = (this.props.amount * this.props.conversionRate).toFixed(2);
@@ -67,7 +72,11 @@ class Home extends Component {
     return (
       <Container backgroundColor={this.props.primaryColor}>
         <StatusBar barStyle="light-content" />
-        <Header onPress={this.handleOptionsPress} />
+        <Header
+          onPress={this.handleOptionsPress}
+          isConnected={isConnected}
+          onWarningPress={this.handleDisconnectedPress}
+        />
         <KeyboardAvoidingView behavior="padding">
           <Logo tintColor={this.props.primaryColor} />
           <InputWithButton
@@ -112,6 +121,7 @@ const mapStateToProps = (state) => {
     isFetching: conversionSelector.isFetching,
     primaryColor: state.theme.primaryColor,
     currencyError: state.currencies.error,
+    isConnected: state.network.connected,
   };
 };
 
