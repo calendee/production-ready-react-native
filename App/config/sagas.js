@@ -9,8 +9,17 @@ import {
   CONVERSION_ERROR,
 } from '../actions/currencies';
 
+const requestTimeout = (timeInMs, promise) =>
+  new Promise((resolve, reject) => {
+    setTimeout(
+      () => reject(new Error('Request has timed out - unable to fetch conversion data')),
+      timeInMs,
+    );
+    promise.then(resolve, reject);
+  });
+
 export const getLatestRate = currency =>
-  fetch(`https://fixer.handlebarlabs.com/latest?base=${currency}`);
+  requestTimeout(2000, fetch(`https://fixer.handlebarlabs.com/latest?base=${currency}`));
 
 const fetchLatestConversionRates = function* ({ currency }) {
   const { connected, hasCheckedStatus } = yield select(state => state.network);
