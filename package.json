@@ -9,7 +9,9 @@
     "lint:fix": "eslint . --fix",
     "start": "node node_modules/react-native/local-cli/cli.js start",
     "test": "jest",
-    "test:coverage": "jest --coverage && open coverage/lcov-report/index.html"
+    "test:coverage": "jest --coverage && open coverage/lcov-report/index.html",
+    "react-devtools": "react-devtools",
+    "react-devtools:android": "adb reverse tcp:8097 tcp:8097 && react-devtools"
   },
   "dependencies": {
     "react": "16.6.3",
@@ -50,8 +52,6 @@
     "transform": {
       "^.+\\.js$": "<rootDir>/node_modules/react-native/jest/preprocessor.js"
     },
-    "collectCoverageFrom": [
-      "App/**/*.js"
-    ]
+    "collectCoverageFrom": ["App/**/*.js"]
   }
 }
